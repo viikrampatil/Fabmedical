@@ -62,16 +62,16 @@ jobs:
     - name: Create ACR credentials secret
       uses: azure/k8s-create-secret@v1
       with:
-        container-registry-url: ${{ env.containerRegistry }}.azurecr.io
-        container-registry-username: ${{ secrets.ACR_USERNAME }}
-        container-registry-password: ${{ secrets.ACR_PASSWORD }}
-        secret-name: ingress-demo-secret
-        namespace: ingress-demo
-        arguments: --force true
+          container-registry-url: ${{ env.containerRegistry }}.azurecr.io
+          container-registry-username: ${{ secrets.ACR_USERNAME }}
+          container-registry-password: ${{ secrets.ACR_PASSWORD }}
+          secret-name: ingress-demo-secret
+          namespace: ingress-demo
+          arguments: --force true
         
-       - name: Deploy to AKS
-         uses: azure/k8s-deploy@v1
-         with:
+    - name: Deploy to AKS
+      uses: azure/k8s-deploy@v1
+      with:
            manifests: |
              web.deployment.yml
              web.service.yml
