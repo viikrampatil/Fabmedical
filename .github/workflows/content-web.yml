@@ -25,6 +25,7 @@ env:
 
 # Jobs define the actions that take place when code is pushed to the main branch
 jobs:
+jobs:
   build-and-publish-docker-image:
     name: Build and Push Docker Image
     runs-on: ubuntu-latest
@@ -72,11 +73,11 @@ jobs:
     - name: Deploy to AKS
       uses: azure/k8s-deploy@v1
       with:
-        manifests: |
-          web.deployment.yml
-          web.service.yml
-        images: |
-          ${{ env.containerRegistry }}/${{ env.imageRepository }}:${{ env.tag }}
-        imagepullsecrets: |
-          ingress-demo-secret
-        namespace: ingress-demo
+           manifests: |
+             web.deployment.yml
+             web.service.yml
+           images: |
+             ${{ env.containerRegistry }}/${{ env.imageRepository }}:${{ env.tag }}
+           imagepullsecrets: |
+             ingress-demo-secret
+           namespace: ingress-demo
