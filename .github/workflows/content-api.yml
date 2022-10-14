@@ -16,7 +16,7 @@ on:
 # Environment variables are defined so that they can be used throughout the job definitions.
 env:
   imageRepository: 'content-api'
-  resourceGroupName: 'Fabmedical-763511'
+  resourceGroupName: 'fabmedical-763511'
   clusterName: 'fabmedical-763511'
   containerRegistryName: 'fabmedical763511'
   containerRegistry: 'fabmedical763511.azurecr.io'
@@ -25,7 +25,6 @@ env:
 
 # Jobs define the actions that take place when code is pushed to the main branch
 jobs:
-
   build-and-publish-docker-image:
     name: Build and Push Docker Image
     runs-on: ubuntu-latest
