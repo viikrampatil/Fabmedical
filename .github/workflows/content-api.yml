@@ -32,18 +32,17 @@ jobs:
     steps:
     # Checkout the repo
     - uses: actions/checkout@master
-	
+    
     - name: Build and push an image to container registry
-        
       uses: docker/build-push-action@v1
       with:
-          username: ${{ secrets.ACR_USERNAME }}
-          password: ${{ secrets.ACR_PASSWORD }}
-          path: ${{ env.dockerfilePath  }}
-          dockerfile: '${{ env.dockerfilePath }}/Dockerfile'
-          registry: ${{ env.containerRegistry }}
-          repository: ${{ env.imageRepository }}
-          tags: ${{ env.tag }},latest
+        username: ${{ secrets.ACR_USERNAME }}
+        password: ${{ secrets.ACR_PASSWORD }}
+        path: ${{ env.dockerfilePath  }}
+        dockerfile: '${{ env.dockerfilePath }}/Dockerfile'
+        registry: ${{ env.containerRegistry }}
+        repository: ${{ env.imageRepository }}
+        tags: ${{ env.tag }},latest
 
     - uses: Azure/aks-set-context@v1
       with:
@@ -54,11 +53,11 @@ jobs:
     - name: Deploy to AKS
       uses: azure/k8s-deploy@v1
       with:
-          manifests: |
-            api.deployment.yml
-            api.service.yml
-          images: |
-            ${{ env.containerRegistry }}/${{ env.imageRepository }}:${{ env.tag }}
-          imagepullsecrets: |
-            ingress-demo-secret
-          namespace: ingress-demo
+        manifests: |
+          api.deployment.yml
+          api.service.yml
+        images: |
+          ${{ env.containerRegistry }}/${{ env.imageRepository }}:${{ env.tag }}
+        imagepullsecrets: |
+          ingress-demo-secret
+        namespace: ingress-demo
